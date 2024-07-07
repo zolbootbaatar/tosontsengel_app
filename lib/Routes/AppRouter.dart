@@ -5,6 +5,8 @@ import 'package:tosontsengel_app/Screens/Map/MapScreen.dart';
 import 'package:tosontsengel_app/Screens/News/NewsSceen.dart';
 import 'package:tosontsengel_app/Screens/Event/EventScreen.dart';
 import 'package:tosontsengel_app/Screens/Appeal/AppealScren.dart';
+import 'package:tosontsengel_app/Screens/Donation/DonationScreen.dart';
+import 'package:tosontsengel_app/Screens/Appeal/Detial/AppealDetial.dart';
 import 'package:tosontsengel_app/Screens/Event/Detial/EventDetialScreen.dart';
 
 part 'AppRouter.gr.dart';
@@ -19,5 +21,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(path: '/appeal', page: AppealRoute.page),
         AutoRoute(path: '/event', page: EventRoute.page),
         AutoRoute(path: '/eventdetial', page: EventDetialRoute.page),
+        AutoRoute(path: '/appealdetial', page: AppealDetailRoute.page),
+        AutoRoute(path: '/dontaion', page: DonationRoute.page),
       ];
 }

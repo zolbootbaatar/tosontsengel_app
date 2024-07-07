@@ -15,10 +15,28 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    AppealDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<AppealDetailRouteArgs>(
+          orElse: () => const AppealDetailRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: AppealDetailPage(
+          key: args.key,
+          title: args.title,
+          icon: args.icon,
+        ),
+      );
+    },
     AppealRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const AppealPage(),
+      );
+    },
+    DonationRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DonationPage(),
       );
     },
     EventDetialRoute.name: (routeData) {
@@ -59,6 +77,49 @@ abstract class _$AppRouter extends RootStackRouter {
 }
 
 /// generated route for
+/// [AppealDetailPage]
+class AppealDetailRoute extends PageRouteInfo<AppealDetailRouteArgs> {
+  AppealDetailRoute({
+    Key? key,
+    String? title,
+    String? icon,
+    List<PageRouteInfo>? children,
+  }) : super(
+          AppealDetailRoute.name,
+          args: AppealDetailRouteArgs(
+            key: key,
+            title: title,
+            icon: icon,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'AppealDetailRoute';
+
+  static const PageInfo<AppealDetailRouteArgs> page =
+      PageInfo<AppealDetailRouteArgs>(name);
+}
+
+class AppealDetailRouteArgs {
+  const AppealDetailRouteArgs({
+    this.key,
+    this.title,
+    this.icon,
+  });
+
+  final Key? key;
+
+  final String? title;
+
+  final String? icon;
+
+  @override
+  String toString() {
+    return 'AppealDetailRouteArgs{key: $key, title: $title, icon: $icon}';
+  }
+}
+
+/// generated route for
 /// [AppealPage]
 class AppealRoute extends PageRouteInfo<void> {
   const AppealRoute({List<PageRouteInfo>? children})
@@ -68,6 +129,20 @@ class AppealRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'AppealRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DonationPage]
+class DonationRoute extends PageRouteInfo<void> {
+  const DonationRoute({List<PageRouteInfo>? children})
+      : super(
+          DonationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DonationRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

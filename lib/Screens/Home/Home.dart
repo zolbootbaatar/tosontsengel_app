@@ -95,57 +95,62 @@ class HomePage extends StatelessWidget {
                 },
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.white,
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color(0xffd3d3d3),
-                    blurRadius: 15,
-                  )
-                ],
-              ),
-              width: MediaQuery.of(context).size.width * 0.9,
-              child: Row(
-                children: [
-                  SvgPicture.asset(
-                    'assets/home/donation.svg',
-                    height: 50,
-                    width: 50,
-                    fit: BoxFit.cover,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Хандивын мэдээлэл',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700,
-                          color: Color(0xff10618D),
-                        ),
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.6,
-                        child: const Text(
-                          'Тос даасан Тосонцэнгэл нутагтаа сэтгэлийн хандив өргөсөн нийт хүмүүсдээ баярлалаа.',
+            GestureDetector(
+              onTap: () {
+                AutoRouter.of(context).push(const DonationRoute());
+              },
+              child: Container(
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color(0xffd3d3d3),
+                      blurRadius: 15,
+                    )
+                  ],
+                ),
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/home/donation.svg',
+                      height: 50,
+                      width: 50,
+                      fit: BoxFit.cover,
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Хандивын мэдээлэл',
                           style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
                             color: Color(0xff10618D),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          child: const Text(
+                            'Тос даасан Тосонцэнгэл нутагтаа сэтгэлийн хандив өргөсөн нийт хүмүүсдээ баярлалаа.',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xff10618D),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),
