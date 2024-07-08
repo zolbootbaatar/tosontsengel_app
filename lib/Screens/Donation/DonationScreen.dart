@@ -7,6 +7,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tosontsengel_app/Service/Donation.dart';
 import 'package:tosontsengel_app/Utils/CustomAppBar.dart';
 import 'package:tosontsengel_app/Model/DonationModel.dart';
+// ignore_for_file: unnecessary_null_comparison
 
 @RoutePage()
 class DonationPage extends HookConsumerWidget {
@@ -15,6 +16,7 @@ class DonationPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = useState(false);
+    final chartValue = useState('');
 
     final donationFuture = useMemoized(
       () => DonationService().getDonations(),
@@ -64,6 +66,12 @@ class DonationPage extends HookConsumerWidget {
       return fmf.output.withoutFractionDigits;
     }
 
+    List<DonationModel> filteredDonations = chartValue.value.isEmpty
+        ? donations
+        : donations
+            .where((donation) => donation.subject == chartValue.value)
+            .toList();
+
     return Scaffold(
       appBar: const CustomAppBar(
         title: 'Хандивын мэдээлэл',
@@ -74,7 +82,7 @@ class DonationPage extends HookConsumerWidget {
               child: Column(
                 children: [
                   const Text(
-                    'Хандилагчид',
+                    'Хандивлагчид',
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w700,
@@ -96,11 +104,26 @@ class DonationPage extends HookConsumerWidget {
                     ],
                     series: <CircularSeries>[
                       DoughnutSeries<ChartData, String>(
+                        onPointTap: (ChartPointDetails details) {
+                          final clickedSubject =
+                              chartData[details.pointIndex!].x;
+                          chartValue.value = clickedSubject;
+                        },
                         dataSource: chartData,
                         pointColorMapper: (ChartData data, _) => data.color,
                         xValueMapper: (ChartData data, _) => data.x,
                         yValueMapper: (ChartData data, _) => data.y,
+                        dataLabelMapper: (ChartData data, _) => data.x,
+                        dataLabelSettings: const DataLabelSettings(
+                          isVisible: true,
+                          textStyle: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
                         innerRadius: '70%',
+                        explode: true,
+                        explodeGesture: ActivationMode.singleTap,
+                        explodeIndex: 1,
                       )
                     ],
                   ),
@@ -108,7 +131,7 @@ class DonationPage extends HookConsumerWidget {
                     child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
-                      itemCount: donations.length,
+                      itemCount: filteredDonations.length,
                       itemBuilder: (context, index) {
                         return Container(
                           margin: const EdgeInsets.symmetric(
@@ -130,7 +153,7 @@ class DonationPage extends HookConsumerWidget {
                               Flexible(
                                 flex: 6,
                                 child: Text(
-                                  donations[index].subject!,
+                                  filteredDonations[index].subject!,
                                   style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,
@@ -140,7 +163,7 @@ class DonationPage extends HookConsumerWidget {
                               Flexible(
                                 flex: 4,
                                 child: Text(
-                                  '${moneyFormatter(amount: double.tryParse(donations[index].amount ?? '0') ?? 0)}₮',
+                                  '${moneyFormatter(amount: double.tryParse(filteredDonations[index].amount ?? '0') ?? 0)}₮',
                                   style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,

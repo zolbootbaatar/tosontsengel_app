@@ -67,6 +67,17 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const MapPage(),
       );
     },
+    NewsDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<NewsDetailRouteArgs>(
+          orElse: () => const NewsDetailRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: NewsDetailPage(
+          key: args.key,
+          news: args.news,
+        ),
+      );
+    },
     NewsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -225,6 +236,44 @@ class MapRoute extends PageRouteInfo<void> {
   static const String name = 'MapRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [NewsDetailPage]
+class NewsDetailRoute extends PageRouteInfo<NewsDetailRouteArgs> {
+  NewsDetailRoute({
+    Key? key,
+    NewsModel? news,
+    List<PageRouteInfo>? children,
+  }) : super(
+          NewsDetailRoute.name,
+          args: NewsDetailRouteArgs(
+            key: key,
+            news: news,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'NewsDetailRoute';
+
+  static const PageInfo<NewsDetailRouteArgs> page =
+      PageInfo<NewsDetailRouteArgs>(name);
+}
+
+class NewsDetailRouteArgs {
+  const NewsDetailRouteArgs({
+    this.key,
+    this.news,
+  });
+
+  final Key? key;
+
+  final NewsModel? news;
+
+  @override
+  String toString() {
+    return 'NewsDetailRouteArgs{key: $key, news: $news}';
+  }
 }
 
 /// generated route for
