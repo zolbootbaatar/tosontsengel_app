@@ -1,3 +1,4 @@
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:widget_zoom/widget_zoom.dart';
@@ -18,8 +19,8 @@ class MapPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: WidgetZoom(
             heroAnimationTag: 'tag',
-            zoomWidget: Image.asset(
-              'assets/map/map.png',
+            zoomWidget: SvgPicture.asset(
+              'assets/map/map1.svg',
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.5,
               fit: BoxFit.contain,

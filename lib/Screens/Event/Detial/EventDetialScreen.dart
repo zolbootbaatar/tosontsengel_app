@@ -39,7 +39,6 @@ class EventDetialPage extends HookConsumerWidget {
                         itemCount: programmSnapShot.data!.where((e) {
                           String eventDate =
                               e.date!.replaceAll('-', '.').split(' ')[0];
-                          print(eventDate);
                           return eventDate == date;
                         }).length,
                         shrinkWrap: true,
